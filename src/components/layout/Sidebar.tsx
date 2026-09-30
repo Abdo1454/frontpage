@@ -13,17 +13,26 @@ export default function Sidebar() {
   return (
     <div className="pl-10 w-60 bg-[var(--color-bg-secondary)]">
      <ul className="flex flex-col">
-  <li className="flex items-center gap-2">
+  <li  className={`${
+    activeItem === "All Items"
+      ? "bg-[var(--color-accent-subtle)] flex items-center gap-2 text-[var(--color-accent)]"
+      : "flex items-center gap-2 text-[var(--color-text-secondary)]"
+  }`}>
     <FaHome />
 
-    <Button
-      text="All Items"
-      onClick={() => addActive("All Items")}
-      disabled={false}
-    />
+  <Button
+  text="All Items"
+  onClick={() => addActive("All Items")}
+  disabled={false}
+  
+/>
   </li>
 
-  <li className="flex items-center gap-2">
+  <li  className={`${
+    activeItem === "Saved"
+      ? "bg-[var(--color-accent-subtle)] flex items-center gap-2 text-[var(--color-accent)]"
+      : "flex items-center gap-2 text-[var(--color-text-secondary)]"
+  }`}>
     <FaBookmark />
 
     <Button
@@ -31,6 +40,7 @@ export default function Sidebar() {
       onClick={() => addActive("Saved")}
       disabled={false}
     />
+
   </li>
 </ul>
 
@@ -42,7 +52,7 @@ export default function Sidebar() {
 
       {Data.categories.map((category) => (
         <div key={category.name}>
-          <div className="flex items-center justify-start gap-1 rounded-lg">
+          <div className="flex items-center justify-start gap-4 rounded-lg">
             <h4
               className="bg-red-600"
               style={{
@@ -51,9 +61,10 @@ export default function Sidebar() {
               }}
             />
 
-            <h3 className="text-xl font-semibold text-[var(--color-accent)]">
+            <h3 className="text-md font-semibold text-[var(--color-text-secondary)]">
               {category.name}
             </h3>
+           <h3>{category.feeds.length}</h3>
           </div>
 
           {category.feeds.map((feed) => (
